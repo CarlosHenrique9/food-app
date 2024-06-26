@@ -1,0 +1,26 @@
+<div id="<%= dom_id(category) %>" class="bg-white rounded-lg shadow-md p-4 mb-4">
+    <div class="flex items-center justify-between mb-3">
+        <h2 class="text-xl font-semibold text-gray-800">Detalhes da Categoria</h2>
+        <%= link_to "Editar", edit_admin_category_path(category), class: "text-blue-600 hover:underline" %>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <strong class="block text-gray-700 font-medium mb-1">Nome:</strong>
+            <p class="my-2 text-gray-800"><%= category.name %></p>
+        </div>
+        <div>
+            <strong class="block text-gray-700 font-medium mb-1">Descrição:</strong>
+            <p class="my-2 text-gray-800"><%= category.description %></p>
+        </div>
+    </div>
+
+    <div class="flex justify-center items-center mt-4">
+        <strong class="block text-gray-700 font-medium mr-2">Imagem:</strong>
+        <% if category.image.present? %>
+            <%= image_tag(category.image, size: "200x200", class: "rounded-full") %>
+        <% else %>
+            <%= image_tag("https://via.placeholder.com/200", size: "200x200", class: "rounded-full") %>
+        <% end %>
+    </div>
+</div>

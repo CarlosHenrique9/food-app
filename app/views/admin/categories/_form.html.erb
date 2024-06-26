@@ -1,0 +1,32 @@
+<%= form_with(model: [:admin, admin_category], class: "max-w-xl mx-auto") do |form| %>
+  <% if admin_category.errors.any? %>
+    <div id="error_explanation" class="bg-red-100 text-red-500 px-4 py-3 rounded-lg mb-4">
+      <h2 class="font-medium"><%= pluralize(admin_category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul class="mt-2">
+        <% admin_category.errors.full_messages.each do |error| %>
+          <li class="text-sm"><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label :name, class: "block text-gray-700 font-medium mb-1" %>
+    <%= form.text_field :name, class: "form-input w-full mt-2" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :description, class: "block text-gray-700 font-medium mb-1" %>
+    <%= form.text_area :description, rows: 4, class: "form-textarea w-full mt-2" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :image, class: "block text-gray-700 font-medium mb-1" %>
+    <%= form.file_field :image, class: "form-input w-full mt-2" %>
+  </div>
+
+  <div class="text-center">
+    <%= form.submit "Salvar Categoria", class: "py-3 px-6 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+<% end %>

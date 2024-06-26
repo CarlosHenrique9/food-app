@@ -1,0 +1,49 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="font-bold text-4xl">Categorias</h1>
+    <%= link_to "Nova categoria", new_admin_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <div class="flex flex-col w-full">
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border rounded-lg overflow-hidden">
+        <thead class="bg-gray-100 border-b">
+          <tr>
+            <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-800">
+              Imagem
+            </th>
+            <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-800">
+              Nome
+            </th>
+            <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-800">
+              Descrição
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @admin_categories.each do |category| %>
+            <tr class="border-b">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= category.image.present? ? image_tag(category.image.variant(:thumb), class: "h-12 w-12 rounded-full") : image_tag("https://via.placeholder.com/50", class: "h-12 w-12 rounded-full") %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= link_to category.name, edit_admin_category_path(category), class: "underline text-blue-600 hover:text-blue-800" %>
+              </td>
+              <td class="px-6 py-4">
+                <%= truncate(category.description, length: 100, separator: ' ', omission: '...') %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <% if @admin_categories.blank? %>
+    <p class="mt-4 text-gray-600 text-center">Nenhuma categoria encontrada.</p>
+  <% end %>
+</div>

@@ -1,0 +1,42 @@
+<%= form_with(model: [:admin, admin_order], class: "contents") do |form| %>
+  <% if admin_order.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(admin_order.errors.count, "error") %> proibiram que esta ordem fosse salva:</h2>
+
+      <ul>
+        <% admin_order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :customer_email, class: "block font-medium text-gray-800" %>
+    <%= form.text_field :customer_email, class: "block shadow-sm rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :fulfilled, class: "block font-medium text-gray-800" %>
+    <%= form.check_box :fulfilled, class: "form-checkbox h-5 w-5 text-blue-600" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :total, class: "block font-medium text-gray-800" %>
+    <%= form.number_field :total, class: "block shadow-sm rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :address, class: "block font-medium text-gray-800" %>
+    <%= form.text_field :address, class: "block shadow-sm rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :delivery_date, class: "block font-medium text-gray-800" %>
+    <%= form.date_field :delivery_date, class: "block shadow-sm rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit "Salvar Ordem", class: "inline-block px-6 py-3 text-white rounded-lg bg-blue-600 font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+<% end %>

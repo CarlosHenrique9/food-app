@@ -1,0 +1,62 @@
+<footer class="bg-red-600 text-white">
+    <div class="max-w-6xl mx-auto px-4 py-10 md:py-20">
+        <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+            <!-- About Section -->
+            <div class="space-y-8 xl:col-span-1">
+                <h3 class="text-sm font-semibold text-yellow-300 tracking-wider uppercase">
+                    Sobre o Ecommerce
+                </h3>
+                <p class="text-white leading-6">
+                    Lanches deliciosos para você
+                </p>
+            </div>
+            <!-- Links Section -->
+            <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-1">
+                <div>
+                    <h3 class="text-sm font-semibold text-yellow-300 tracking-wider uppercase">
+                        Links
+                    </h3>
+                    <ul class="mt-4 space-y-4">
+                        <li>
+                            <%= link_to "Home", root_path, class:"text-base leading-6 text-white hover:text-yellow-200"%>
+                        </li>
+                        <!-- Add more links here if needed -->
+                    </ul>
+                </div>
+            </div>
+            <!-- Contact Section -->
+            <div class="mt-8 mb-8 xl:mt-0 xl:col-span-1">
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-yellow-300">
+                        Contato
+                    </h3>
+                    <ul class="mt-4 space-y-4">
+                        <li>
+                            <p class="text-base leading-6 text-white">
+                                Amaral <br>
+                               
+                            </p>
+                        </li>
+                        <li>
+                            <p class="text-base leading-6 text-white">
+                                 Telefone: (31) 98916-2848
+                            </p>
+                        </li>
+                        <li>
+                            <p class="text-base leading-6 text-white">
+                                
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-yellow-500 mt-8">
+            <div class="max-w-6xl mx-auto px-4 py-6 md:flex md:items-center md:justify-between">
+                <p class="text-base leading-6 text-yellow-200 md:order-1">
+                    © <%= Time.now.year %> Amaral burger, Inc. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

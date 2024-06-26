@@ -1,0 +1,40 @@
+<div id="<%= dom_id(order) %>">
+  <div class="my-5">
+    <strong class="block font-medium mb-1">E-mail do Cliente:</strong>
+    <%= order.customer_email %>
+  </div>
+
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Fulfillment:</strong>
+    <%= order.fullfiled ? "Sim" : "Não" %>
+  </div>
+
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Total:</strong>
+    <%= number_to_currency(order.total, unit: 'R$', separator: ',', delimiter: '.') %>
+  </div>
+
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Endereço de Entrega:</strong>
+    <%= order.address %>
+  </div>
+
+  <% if order.order_products.any? %>
+    <div class="my-5">
+      <strong class="block font-medium mb-1">Produtos:</strong>
+      <ul class="list-disc list-inside">
+        <% order.order_products.each do |op| %>
+          <li><%= "#{op.product.name} - #{op.size} - Quantidade: #{op.quantity}" %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if action_name != "show" %>
+    <div class="flex mt-6">
+      <%= link_to "Mostrar este pedido", [:admin, order], class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium mr-2" %>
+      <%= link_to "Editar este pedido", edit_admin_order_path(order), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    </div>
+    <hr class="mt-6">
+  <% end %>
+</div>

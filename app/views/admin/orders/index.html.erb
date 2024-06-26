@@ -1,0 +1,62 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="font-bold text-4xl">Pedidos</h1>
+    <%= link_to "Novo Pedido", new_admin_order_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <div class="mb-8">
+    <h2 class="text-2xl mb-2 font-medium">Pedidos Pendentes</h2>
+    <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+      <table class="min-w-full overflow-x-scroll bg-white shadow-md rounded-lg">
+        <thead class="bg-gray-200">
+          <tr>
+            <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">ID do Pedido</th>
+            <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">E-mail do Cliente</th>
+            <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">Endereço</th>
+            <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">Total</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <% @not_fulfilled_orders.each do |order| %>
+            <tr class="border-b">
+              <td class="px-6 py-4 whitespace-nowrap"><%= link_to order.id, [:admin, order], class: 'underline' %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= order.customer_email %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= order.address %></td>
+              <td class="px-6 py-4 whitespace-nowrap">R$ <%= number_to_currency(order.total, unit: '', separator: ',', delimiter: '.') %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-2xl mb-2 font-medium">Pedidos Atendidos</h2>
+    <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+      <table class="min-w-full overflow-x-scroll bg-white shadow-md rounded-lg">
+        <thead class="bg-gray-200">
+          <tr>
+            <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">ID do Pedido</th>
+            <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">E-mail do Cliente</th>
+            <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">Endereço</th>
+            <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">Total</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <% @fulfilled_orders.each do |order| %>
+            <tr class="border-b">
+              <td class="px-6 py-4 whitespace-nowrap"><%= link_to order.id, [:admin, order], class: 'underline' %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= order.customer_email %></td>
+              <td class="px-6 py-4 whitespace-nowrap"><%= order.address %></td>
+              <td class="px-6 py-4 whitespace-nowrap">R$ <%= number_to_currency(order.total, unit: '', separator: ',', delimiter: '.') %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

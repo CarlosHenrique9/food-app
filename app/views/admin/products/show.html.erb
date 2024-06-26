@@ -1,0 +1,15 @@
+<div class="mx-auto md:w-2/3 w-full flex">
+  <div class="mx-auto">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
+
+    <%= render @admin_product %>
+
+    <div class="mt-4 flex">
+      <%= link_to "Editar este produto", edit_admin_product_path(@admin_product), class: "rounded-lg py-3 px-5 bg-gray-100 text-gray-800 font-medium mr-2 hover:bg-gray-200 transition duration-300 ease-in-out" %>
+      <%= link_to "Voltar para produtos", admin_products_path, class: "rounded-lg py-3 px-5 bg-gray-100 text-gray-800 font-medium mr-2 hover:bg-gray-200 transition duration-300 ease-in-out" %>
+      <%= button_to "Excluir este produto", admin_product_path(@admin_product), method: :delete, data: { confirm: "Tem certeza que deseja excluir este produto?" }, class: "rounded-lg py-3 px-5 bg-red-500 text-white font-medium hover:bg-red-600 transition duration-300 ease-in-out" %>
+    </div>
+  </div>
+</div>

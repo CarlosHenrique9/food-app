@@ -1,0 +1,26 @@
+<%= form_with(model: [:admin, @product, admin_stock], class: "contents") do |form| %>
+  <% if admin_stock.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(admin_stock.errors.count, "error") %> impediram que este estoque fosse salvo:</h2>
+      <ul>
+        <% admin_stock.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :amount, "Quantidade" %>
+    <%= form.number_field :amount, class: "block shadow-sm rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :size, "Tamanho" %>
+    <%= form.text_field :size, class: "block shadow-sm rounded-md border border-gray-300 outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit "Salvar estoque", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer hover:bg-blue-700 transition duration-300 ease-in-out" %>
+  </div>
+<% end %>

@@ -1,0 +1,53 @@
+<%= form_with(model: [:admin, admin_product], local: true, class: "contents space-y-5") do |form| %>
+  <% if admin_product.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(admin_product.errors.count, "erro") %> impediram este produto de ser salvo:</h2>
+      <ul>
+        <% admin_product.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name, class: "block font-medium text-gray-700" %>
+    <%= form.text_field :name, placeholder: "Nome do Produto", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :description, class: "block font-medium text-gray-700" %>
+    <%= form.text_area :description, rows: 4, placeholder: "Descrição do Produto", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500" %>
+  </div>
+
+  <div class="my-5">
+    <% if admin_product.images.any? %>
+      <div class="flex space-x-3">
+        <% admin_product.images.each do |image| %>
+          <%= image_tag image.variant(:thumb), class: "w-20 h-20 object-cover rounded-md" %>
+        <% end %>
+      </div>
+    <% end %>
+    <%= form.label :images, class: "block font-medium text-gray-700" %>
+    <%= form.file_field :images, multiple: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :price, class: "block font-medium text-gray-700" %>
+    <%= form.number_field :price, placeholder: "Preço do Produto", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :category_id, class: "block font-medium text-gray-700" %>
+    <%= form.collection_select :category_id, Category.order(:name), :id, :name, { prompt: "Selecione uma Categoria" }, { id: "category", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500" } %>
+  </div>
+
+  <div class="my-5 flex items-center">
+    <%= form.label :active, class: "block font-medium text-gray-700 mr-3" %>
+    <%= form.check_box :active, class: "block h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit "Salvar", class: "rounded-lg py-3 px-5 bg-blue-600 text-white font-medium cursor-pointer hover:bg-blue-700" %>
+  </div>
+<% end %>

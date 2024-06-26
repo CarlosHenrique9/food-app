@@ -1,0 +1,79 @@
+<h1 class="text-3xl text-gray-800 font-semibold mb-8">Painel de Administração</h1>
+
+<div class="flex flex-wrap gap-6 w-full">
+    <div class="w-full md:w-1/2">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl text-gray-800 font-semibold mb-4">Estatísticas Diárias</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-gradient-to-r from-gray-400 to-gray-300 rounded-lg overflow-hidden shadow-md p-4">
+                    <div class="text-gray-800 text-center">
+                        <div class="font-bold text-lg mb-2">Receita</div>
+                        <p class="text-2xl">
+                            R$ <%= @quick_stats[:revenue].present? ? number_to_currency(@quick_stats[:revenue], unit: '', separator: ',', delimiter: '.') : "0" %>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-gray-400 to-gray-300 rounded-lg overflow-hidden shadow-md p-4">
+                    <div class="text-gray-800 text-center">
+                        <div class="font-bold text-lg mb-2">Vendas Totais</div>
+                        <p class="text-2xl">
+                            <%= @quick_stats[:sales].present? ? @quick_stats[:sales].to_s : "0" %>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-gray-400 to-gray-300 rounded-lg overflow-hidden shadow-md p-4">
+                    <div class="text-gray-800 text-center">
+                        <div class="font-bold text-lg mb-2">Venda Média</div>
+                        <p class="text-2xl">
+                            R$ <%= @quick_stats[:avg_sale].present? ? number_to_currency(@quick_stats[:avg_sale], unit: '', separator: ',', delimiter: '.') : "0" %>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-gray-400 to-gray-300 rounded-lg overflow-hidden shadow-md p-4">
+                    <div class="text-gray-800 text-center">
+                        <div class="font-bold text-lg mb-2">Itens por Venda</div>
+                        <p class="text-2xl">
+                            <%= @quick_stats[:per_sale].to_i %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full md:w-1/2">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl text-gray-800 font-semibold mb-4">Receita por Dia</h2>
+            <div class="w-full" data-controller="dashboard" data-dashboard-revenue-value="<%= @revenue_by_day.to_json %>">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-8 w-full">
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl text-gray-800 font-semibold mb-4">Pedidos Recentes Não Atendidos</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-gray-100 rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="text-gray-800">
+                        <th class="px-6 py-3 bg-gray-200">ID do Pedido</th>
+                        <th class="px-6 py-3 bg-gray-200">E-mail do Cliente</th>
+                        <th class="px-6 py-3 bg-gray-200">Data</th>
+                        <th class="px-6 py-3 bg-gray-200">Total</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <% @orders.each do |order| %>
+                        <tr class="hover:bg-gray-200 transition-colors">
+                            <td class="px-6 py-4"><%= link_to order.id, admin_order_path(order), class: "underline" %></td>
+                            <td class="px-6 py-4"><%= order.customer_email %></td>
+                            <td class="px-6 py-4"><%= order.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+                            <td class="px-6 py-4">R$ <%= number_to_currency(order.total, unit: '', separator: ',', delimiter: '.') %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

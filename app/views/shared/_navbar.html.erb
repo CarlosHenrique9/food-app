@@ -1,0 +1,37 @@
+<nav class="fixed w-full top-0 bg-yellow-300 z-10 shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <!-- Links de navegação -->
+        <div class="flex space-x-6">
+          <%= link_to 'Início', root_path, class: 'text-gray-900 hover:text-red-700' %>
+          <%= link_to 'Sobre', about_path, class: 'text-gray-900 hover:text-red-700' %>
+
+          <!-- Botões de Categorias -->
+          <div class="flex space-x-4">
+            <% Category.all.each do |category| %>
+              <%= link_to category_path(category), class: 'text-gray-900 hover:text-red-700 focus:outline-none flex items-center' do %>
+                <%= category.name %>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Fim dos Botões de Categorias -->
+        </div>
+      </div>
+
+      <!-- Logo -->
+      <div class="hidden lg:flex items-center justify-center">
+        <%= link_to root_path do %>
+          <%= image_tag 'amaral.png', alt: 'Logo do Restaurante', class: 'h-12' %>
+        <% end %>
+      </div>
+
+      <div class="flex items-center">
+        <!-- Carrinho -->
+        <%= link_to cart_path, class: 'text-gray-900 hover:text-red-700 ml-6' do %>
+          <%= icon 'fa-solid', 'shopping-cart' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,54 @@
+<h1 class="text-3xl font-bold text-center mt-10">Página de Produto Detalhada</h1>
+<div class="flex flex-col lg:flex-row justify-center gap-20 py-10 px-4 sm:px-6 lg:px-8" data-controller="products" data-products-product-value='{"id": "<%= @product.id %>", "name": "<%= @product.name %>", "price": <%= @product.price %>}' data-products-size-value="">
+    <!-- Product Images -->
+    <div class="flex flex-wrap max-w-lg justify-center lg:justify-start">
+        <% @product.images.each do |image| %>
+            <div class="p-2">
+                <%= image_tag image, class: "w-auto h-64 rounded shadow-lg" %>
+            </div>
+        <% end %>
+    </div>
+
+    <!-- Product Details -->
+    <div data-controller="products" data-products-product-value="<% @product.to_json %>" class="flex flex-col items-start max-w-sm bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="font-bold text-4xl uppercase text-gray-800 mb-4">
+            <%= @product.name %>
+        </h1>
+        <p class="text-2xl text-red-600 mb-4">
+            R$ <%= @product.price.to_s %>
+        </p>
+        <p class="text-md text-gray-600 mb-8">
+            <%= @product.description %>
+        </p>
+
+        <!-- Product Sizes -->
+        <div class="mb-8">
+            <p class="uppercase text-lg text-gray-800 mb-2">Tamanho</p>
+                <% @product.stocks.each do |stock| %>
+                    <% if stock.amount > 0 %>
+            <div class="flex flex-wrap gap-2" id="sizes#selectSize">
+                        <button data-action="click->products" value="<%= stock.size %>" class="size-button bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition duration-300" data-action="click->products#selectSize">
+                            <%= stock.size %>
+                        </button>
+                    <% else %>
+                        <button disabled value="<%= stock.size %>" class="disabled:bg-gray-400 bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition duration-300">
+                            <%= stock.size %>
+                        </button>
+                    <% end %>
+                <% end %>
+            </div>
+            <div id="selected-size" class="mt-4 text-gray-600"></div>
+        </div>
+
+        <!-- Quantity Input -->
+        <div class="mb-8">
+            <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Quantidade:</label>
+            <input type="number" id="quantity" min="1" value="1" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+        </div>
+
+        <!-- Add to Cart Button -->
+        <button data-action="click->products#addToCart" class="inline-flex items-center justify-center px-5 py-3 border-transparent font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300">
+            Adicionar ao Carrinho
+        </button>
+    </div>
+</div>
